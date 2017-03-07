@@ -1,6 +1,4 @@
-# Testing in isolation
-
-![](alone-in-the-woods.jpg)
+![filtered](alone-in-the-woods.jpg)
 
 ^You and your friends plan a fun hike out in the wilderness
 
@@ -176,7 +174,7 @@ end
 
 ^But first, we need to address the elephant in the room.
 
-^What exactly are we testing?
+^What exactly are we testing in a unit test?
 
 ---
 
@@ -222,7 +220,7 @@ each other
 
 ^I've separated them into three orbits
 
-^In green at the center, is the single object we are interested it: the one we
+^In green at the center, is the single object we are interested in: the one we
 are testing
 
 ^Directly connected to it in the blue orbit, are other objects that help it do
@@ -322,16 +320,16 @@ end
 
 ^Enter the test double
 
-^Instead of having to create a Formatter _and_ a User and write a test that
-exercises them both together, I can create a test double with a first and last
-name as a stand-in for the collaborator
+^Instead of having to create both a `Formatter` _and_ a `User` and write a test
+that exercises them both together, I can create a test double with a first and
+last name as a stand-in for the collaborator
 
 ^Fun side note: test doubles got their name from stunt doubles in the movies
 
-^By using a test double here, we've successfully isolated Formatter from it's
+^By using a test double here, we've successfully isolated `Formatter` from it's
 collaborator.
 
-^The User class doesn't even need to exist, this test will pass
+^The `User` class doesn't even need to exist, this test will pass
 
 ^Great!
 
@@ -341,8 +339,8 @@ collaborator.
 
 ![](injection.jpg)
 
-^Part of the reason it was so easy to isolate in that test was because the
-collaborator was passed in as an argument
+^Part of the reason it was so easy to isolate the `Formatter` in that test was
+because the collaborator was passed in as an argument
 
 ^This is a technique known as dependency injection
 
@@ -483,7 +481,7 @@ end
 ^No more long chain of dependencies
 
 ^Remember, this is all about Formatter. The implementation of
-User#most_recent_comment doesn't matter here.
+`User#most_recent_comment` doesn't matter here.
 
 ---
 
@@ -619,12 +617,12 @@ end
 
 ^It has two methods that do a lot of things
 
-^The second method do_another_thing calls the first one as part of what it does
+^The second method `do_another_thing` calls the first one as part of what it does
 
-^You don't want to re-test all of the behavior of do_a_thing in the tests for
-do_another_thing
+^You don't want to re-test all of the behavior of `do_a_thing` in the tests for
+`do_another_thing`
 
-^Wouldn't be nice if you could instead treat do_a_thing as if it were a
+^Wouldn't be nice if you could instead treat `do_a_thing` as if it were a
 collaborator?
 
 ---
@@ -642,10 +640,11 @@ end
 
 ^Turns out you can!
 
-^Extract a separate class and pass in the know it all as a collaborator
+^Extract a separate class and use dependency injection to pass in the know it
+all as a collaborator
 
-^Now you can use a double to stand in for the know it all on only test the
-behavior that you've written as part of do_another_thing
+^Now you can use a double to stand in for the know-it-all, and only test the
+behavior that you've written as part of `do_another_thing`
 
 ---
 
